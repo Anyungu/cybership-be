@@ -1,0 +1,16 @@
+-- CreateEnum
+CREATE TYPE "OrderStatus" AS ENUM ('PLACED', 'APPROVED', 'REJECTED', 'IN_TRANSIT', 'COMPLETED');
+
+-- CreateTable
+CREATE TABLE "Order" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "status" "OrderStatus" NOT NULL DEFAULT 'PLACED',
+    "amount" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "reference" VARCHAR(255) NOT NULL DEFAULT '',
+    "customerName" VARCHAR(255) DEFAULT '',
+
+    CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
+);

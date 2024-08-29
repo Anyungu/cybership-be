@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Order {
+  id           Int         @id @default(autoincrement())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  date         DateTime    @default(now())
+  status       OrderStatus @default(PLACED)
+  amount       Float       @default(0)
+  reference    String      @default("") @db.VarChar(255)
+  customerName String?     @default("") @db.VarChar(255)
+}
+
+enum OrderStatus {
+  PLACED
+  APPROVED
+  REJECTED
+  IN_TRANSIT
+  COMPLETED
+}
